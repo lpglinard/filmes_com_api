@@ -1,3 +1,9 @@
+/*
+Novo listview para colocar os listviews
+Deixar ele mais vizual
+*/
+
+
 import 'package:filmes_com_api/model/movie.dart';
 import 'package:filmes_com_api/component/movie_card.dart';
 import 'package:flutter/material.dart';
@@ -28,17 +34,42 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF0d0e0f),
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        leading: IconButton(onPressed: (){}, icon: const Icon(Icons.abc)),
+        title: Center(
+          child: Text(
+            widget.title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Color(0xFF53088c),
+            ),
+          ),
+        ),
       ),
-      body: Center(
-        child: ListView.builder(
-            itemCount: exampleMovies.length,
-            itemBuilder: (context, index) {
-              return MovieCard(movie: exampleMovies[index]);
-            })
+      body: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(bottom: 16, left: 8, right: 8),
+            child: Image(image: NetworkImage('url'),height: 80,),
+          ),
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemCount: exampleMovies.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    MovieCard(movie: exampleMovies[index]),
+                  ],
+                );
+              }),
+          ),
+         ],
       ),
+      
       );
   }
 }

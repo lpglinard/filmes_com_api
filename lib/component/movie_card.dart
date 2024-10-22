@@ -11,10 +11,52 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(movie.title),
-      subtitle: Text(movie.director),
-      trailing: Text(movie.year.toString()),
+    return SizedBox(
+      width: 230,
+      height: 400,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 50,
+                width: 50,
+                child: Image.network('src',)),
+              const SizedBox(height: 8,),
+              Text(
+            movie.title,
+            style: const TextStyle(
+              fontSize: 20, 
+              fontWeight: FontWeight.bold, 
+              color: Colors.white,
+            ),
+            overflow: TextOverflow.fade,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            movie.director,
+            style: const TextStyle(
+              fontSize: 12, 
+              fontWeight: FontWeight.bold, 
+              color: Colors.white,
+            ),
+            overflow: TextOverflow.fade,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            movie.year.toString(),
+            style: const TextStyle(
+              fontSize: 12, 
+              fontWeight: FontWeight.bold, 
+              color: Colors.white,
+            ),
+          ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
