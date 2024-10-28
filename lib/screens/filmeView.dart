@@ -30,7 +30,7 @@ class FilmeView extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image(image: AssetImage('')),
+          const Image(image: AssetImage('')),
           Padding(
             padding: const EdgeInsets.all(16),
             child: Text(
