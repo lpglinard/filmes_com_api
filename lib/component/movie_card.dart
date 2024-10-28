@@ -1,21 +1,30 @@
 import 'package:filmes_com_api/model/movie.dart';
 import 'package:flutter/material.dart';
+import '../screens/filmeView.dart';
 
 class MovieCard extends StatelessWidget {
+  final int index;
   const MovieCard({
     super.key,
     required this.movie,
+    required this.index,
   });
 
   final Movie movie;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 230,
-      height: 400,
+    return InkWell(
+      onTap: (){
+         Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => FilmeView(index: index),
+          ),
+        );
+      },
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.start,

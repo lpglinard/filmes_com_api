@@ -1,8 +1,17 @@
 import 'package:filmes_com_api/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import './model/movieProvider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => MovieProvider()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

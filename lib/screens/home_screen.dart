@@ -1,46 +1,24 @@
-/*
-Novo listview para colocar os listviews
-Deixar ele mais vizual
-*/
-
-
-import 'package:filmes_com_api/model/movie.dart';
-import 'package:filmes_com_api/component/movie_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:filmes_com_api/component/movie_card.dart';
+import '../model/movieProvider.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class MyHomePage extends StatelessWidget {
   final String title;
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  var exampleMovies = [
-    Movie(title: "O sexto sentido", director: "M. Night S.", year: 1999),
-    Movie(title: "Matrix", director: "Lana Wachowski, Lilly Wachowski", year: 1999),
-    Movie(title: "Clube da Luta", director: "David Fincher", year: 1999),
-    Movie(title: "Forrest Gump", director: "Robert Zemeckis", year: 1994),
-    Movie(title: "O Poderoso Chefão", director: "Francis Ford Coppola", year: 1972),
-    Movie(title: "Pulp Fiction", director: "Quentin Tarantino", year: 1994),
-    Movie(title: "A Origem", director: "Christopher Nolan", year: 2010),
-    Movie(title: "Interestelar", director: "Christopher Nolan", year: 2014),
-    Movie(title: "O Senhor dos Anéis: A Sociedade do Anel", director: "Peter Jackson", year: 2001),
-    Movie(title: "Star Wars: Episódio IV - Uma Nova Esperança", director: "George Lucas", year: 1977)
-  ];
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final movieProvider = Provider.of<MovieProvider>(context);
+
     return Scaffold(
       backgroundColor: const Color(0xFF0d0e0f),
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        leading: IconButton(onPressed: (){}, icon: const Icon(Icons.abc)),
         title: Center(
           child: Text(
-            widget.title,
+            title,
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: Color(0xFF53088c),
@@ -52,24 +30,25 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           const Padding(
             padding: EdgeInsets.only(bottom: 16, left: 8, right: 8),
-            child: Image(image: NetworkImage('url'),height: 80,),
+            child: Image(image: NetworkImage('url'), height: 80,),
           ),
-          Expanded(
+          SizedBox(
+            height: 500,
+            width: double.infinity,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemCount: exampleMovies.length,
+              itemCount: movieProvider.movies.length,
               itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    MovieCard(movie: exampleMovies[index]),
-                  ],
+                final movie = movieProvider.movies[index];
+                return SizedBox(
+                  width: 200,
+                  child: MovieCard(movie: movie, index: index,),
                 );
-              }),
+              },
+            ),
           ),
-         ],
+        ],
       ),
-      
-      );
+    );
   }
 }
