@@ -1,20 +1,24 @@
 class Movie {
   final String title;
-  final String director;
-  final int year;
-  String? poster;
-  String? plot;
-  String? sinopse;
+  final String posterPath;
+  final String overview;
+  final String releaseDate;
 
-  Movie({required this.title,
-    required this.director,
-    required this.year,
-    this.plot,
-    this.poster,
-    this.sinopse});
+  Movie({
+    required this.title,
+    required this.posterPath,
+    required this.overview,
+    required this.releaseDate,
+  });
 
-  @override
-  String toString() {
-    return 'Movie{title: $title, director: $director, year: $year, poster: $poster, plot: $plot}';
+  factory Movie.fromJson(Map<String, dynamic> json) {
+    return Movie(
+      title: json['title'] ?? 'Sem título',
+      posterPath: json['poster_path'] != null
+          ? 'https://image.tmdb.org/t/p/w500${json['poster_path']}'
+          : '',
+      overview: json['overview'] ?? 'Sem sinopse',
+      releaseDate: json['release_date'] ?? 'Sem data',
+    );
   }
 }
