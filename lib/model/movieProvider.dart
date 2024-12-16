@@ -12,7 +12,7 @@ class MovieProvider with ChangeNotifier {
     Movie(title: "A Origem", director: "Christopher Nolan", year: 2010),
     Movie(title: "Interestelar", director: "Christopher Nolan", year: 2014),
     Movie(title: "O Senhor dos Anéis: A Sociedade do Anel", director: "Peter Jackson", year: 2001),
-    Movie(title: "Star Wars: Episódio IV - Uma Nova Esperança", director: "George Lucas", year: 1977)
+    Movie(title: "Star Wars: Episódio  - Uma Nova Esperança", director: "George Lucas", year: 1977)
   ];
 
   List<Movie> get movies => _movies;
